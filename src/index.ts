@@ -1,9 +1,8 @@
 import express, { Request, Response } from "express";
+import { dashboardRoute } from "./routes/dashboard/dashboardRoute";
 const app = express();
 const port = 8080;
 
-app.get("/", (req: Request, res: Response) => {
-	res.send("this runs on typescript");
-});
+app.use(dashboardRoute);
 
 app.listen(port, () => console.log(`server running on port ${port}`));
