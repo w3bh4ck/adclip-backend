@@ -1,19 +1,9 @@
 import { gql } from "apollo-server";
-
-const users = [
-	{
-		name: "okey",
-		email: "okey.com"
-	},
-	{
-		name: "kalu",
-		email: "kalu.com"
-	}
-];
+import { connection } from "../db/dbConnection";
 
 export const typeDefs = gql`
 	type Users {
-		name: String
+		username: String
 		email: String
 	}
 
@@ -24,6 +14,9 @@ export const typeDefs = gql`
 
 export const resolvers = {
 	Query: {
-		users: () => users
+		users: async () => {
+			const users = await connection.select("*").from("users");
+			return users;
+		}
 	}
 };
