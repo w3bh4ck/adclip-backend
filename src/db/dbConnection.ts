@@ -1,9 +1,11 @@
-import { Client } from "pg";
-const client = new Client();
+import knex from "knex";
 
-export const databaseConnection = async () => {
-	await client.connect();
-	const res = await client.query("SELECT $1::text as message", ["Hello world!"]);
-	console.log(res.rows[0].message); // Hello world!
-	await client.end();
-};
+export const connection = knex({
+	client: "pg",
+	connection: {
+		host: "127.0.0.1",
+		user: "w3bh4ck",
+		password: "secret",
+		database: "adclip"
+	}
+});
