@@ -1,8 +1,10 @@
 import { gql } from "apollo-server";
 import { connection } from "../db/dbConnection";
 
-interface user {
+interface newUser {
 	email: string;
+	username: string;
+	password: string;
 }
 
 export const typeDefs = gql`
@@ -25,8 +27,11 @@ export const resolvers = {
 	},
 
 	Mutation: {
-		addUser: async (_, { email }, __) => {
-			const user = await connection.in;
+		addUser: async (_: any, { email, username, password }, __: any) => {
+			const user = await connection
+				.insert([{ email: email }, { username: username }, { password: password }], ["id"])
+				.into("users");
+			return user;
 		}
 	}
 };
