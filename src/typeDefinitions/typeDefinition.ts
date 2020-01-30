@@ -16,6 +16,16 @@ export const typeDefs = gql`
 	type Query {
 		users: [Users]
 	}
+
+	input newUser {
+		email: String
+		username: String
+		password: String
+	}
+
+	type Mutation {
+		addUser(input: newUser): [Users]
+	}
 `;
 
 export const resolvers = {
@@ -27,10 +37,12 @@ export const resolvers = {
 	},
 
 	Mutation: {
-		addUser: async (_: any, { email, username, password }, __: any) => {
-			const user = await connection
-				.insert([{ email: email }, { username: username }, { password: password }], ["id"])
-				.into("users");
+		addUser(_: any, { email, username, password }: newUser, __: any) {
+			const user = connection("users").insert([
+				{ email: email },
+				{ username: username },
+				{ password: password }
+			]);
 			return user;
 		}
 	}

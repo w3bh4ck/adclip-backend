@@ -20,6 +20,16 @@ exports.typeDefs = apollo_server_1.gql `
 	type Query {
 		users: [Users]
 	}
+
+	input newUser {
+		email: String
+		username: String
+		password: String
+	}
+
+	type Mutation {
+		addUser(input: newUser): [Users]
+	}
 `;
 exports.resolvers = {
     Query: {
@@ -27,6 +37,14 @@ exports.resolvers = {
             const users = yield dbConnection_1.connection.select("*").from("users");
             return users;
         })
+    },
+    Mutation: {
+        addUser(_, { email, username, password }, __) {
+            const user = dbConnection_1.connection
+                .insert([{ email: email }, { username: username }, { password: password }], ["id"])
+                .into("users");
+            return user;
+        }
     }
 };
 //# sourceMappingURL=typeDefinition.js.map
