@@ -38,12 +38,7 @@ export const resolvers = {
 
 	Mutation: {
 		addUser(_: any, { email, username, password }: newUser, __: any) {
-			const user = connection("users").insert([
-				{ email: email },
-				{ username: username },
-				{ password: password }
-			]);
-			return user;
+			// add knex function here
 		}
 	}
 };
