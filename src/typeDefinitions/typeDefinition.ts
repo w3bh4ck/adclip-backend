@@ -34,12 +34,12 @@ export const resolvers = {
 			const users = await connection.select("*").from("users");
 			return users;
 		}
-	},
-
-	Mutation: {
-		addUser(_: any, { email, username, password }: newUser, __: any) {
-			connection("users").insert({ email: email });
-			// add knex function here
-		}
 	}
+
+	// Mutation: {
+	// 	addUser(_: any, { email, username, password }: newUser, __: any) {
+	// 		connection("users").insert({ email: email });
+	// 		// add knex function here
+	// 	}
+	// }
 };

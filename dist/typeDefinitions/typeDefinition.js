@@ -40,12 +40,8 @@ exports.resolvers = {
     },
     Mutation: {
         addUser(_, { email, username, password }, __) {
-            const user = dbConnection_1.connection("users").insert([
-                { email: email },
-                { username: username },
-                { password: password }
-            ]);
-            return user;
+            dbConnection_1.connection("users").insert({ email: email });
+            // add knex function here
         }
     }
 };
