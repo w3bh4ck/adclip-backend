@@ -1,4 +1,13 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,13 +17,46 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_1 = require("apollo-server");
+const typeorm_1 = require("typeorm");
 const dbConnection_1 = require("../db/dbConnection");
-const uuid_1 = __importDefault(require("uuid"));
+let userProfile = class userProfile {
+};
+__decorate([
+    typeorm_1.PrimaryColumn(),
+    __metadata("design:type", Number)
+], userProfile.prototype, "id", void 0);
+__decorate([
+    typeorm_1.Column("text"),
+    __metadata("design:type", String)
+], userProfile.prototype, "username", void 0);
+__decorate([
+    typeorm_1.Column("text"),
+    __metadata("design:type", String)
+], userProfile.prototype, "email", void 0);
+__decorate([
+    typeorm_1.Column(),
+    __metadata("design:type", String)
+], userProfile.prototype, "password", void 0);
+userProfile = __decorate([
+    typeorm_1.Entity()
+], userProfile);
+typeorm_1.createConnection({
+    type: "postgres",
+    host: "localhost",
+    port: 5432,
+    username: "w3bh4ck",
+    password: "secret",
+    database: "adclip",
+    entities: [userProfile],
+    synchronize: true,
+    logging: false
+})
+    .then(connection => {
+    // here you can start to work with your entities
+})
+    .catch(error => console.log(error));
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
@@ -53,16 +95,25 @@ exports.resolvers = {
     },
     Mutation: {
         addUser(_, { input }) {
-            // console.log("CHECK email", input.email);
-            dbConnection_1.connection("profiles")
-                .returning("*")
-                .insert({
-                email: input.email,
-                username: input.username,
-                password: input.password,
-                id: uuid_1.default()
-            })
-                .then(() => console.log);
+            typeorm_1.createConnection( /*...*/)
+                .then((connection) => __awaiter(this, void 0, void 0, function* () {
+                let newProfile = new userProfile();
+                newProfile.email = input.email;
+                newProfile.username = input.username;
+                newProfile.password = input.password;
+                yield connection.manager.save(newProfile);
+                console.log("Photo has been saved", newProfile);
+            }))
+                .catch(error => console.log(error));
+            // connection("profiles")
+            // 	.returning("*")
+            // 	.insert({
+            // 		email: input.email,
+            // 		username: input.username,
+            // 		password: input.password,
+            // 		id: uuid()
+            // 	})
+            // 	.then(() => console.log);
             return input;
             // add knex function here
         }
