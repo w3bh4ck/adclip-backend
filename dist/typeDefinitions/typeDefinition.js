@@ -15,6 +15,7 @@ exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
 		email: String
+		password: String
 	}
 
 	type Query {
@@ -28,7 +29,7 @@ exports.typeDefs = apollo_server_1.gql `
 	}
 
 	type Mutation {
-		addUser(input: newUser): [Users]
+		addUser(input: newUser): [Users]!
 	}
 `;
 exports.resolvers = {
@@ -39,8 +40,16 @@ exports.resolvers = {
         })
     },
     Mutation: {
-        addUser(_, { email, username, password }, __) {
-            dbConnection_1.connection("users").insert({ email: email });
+        addUser(_, { input }) {
+            // console.log("CHECK email", input.email);
+            dbConnection_1.connection("users")
+                .insert({
+                email: input.email,
+                username: input.username,
+                password: input.password
+            })
+                .then(() => console.log);
+            return [input];
             // add knex function here
         }
     }
