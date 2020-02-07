@@ -8,27 +8,40 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const apollo_server_1 = require("apollo-server");
 const dbConnection_1 = require("../db/dbConnection");
+const uuid_1 = __importDefault(require("uuid"));
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
 		email: String
+		password: String
+	}
+
+	type user {
+		username: String
+		email: String
+		password: String
 	}
 
 	type Query {
 		users: [Users]
+		user: user!
 	}
 
 	input newUser {
 		email: String
 		username: String
 		password: String
+		id: String
 	}
 
 	type Mutation {
-		addUser(input: newUser): [Users]
+		addUser(input: newUser): user
 	}
 `;
 exports.resolvers = {
@@ -39,8 +52,18 @@ exports.resolvers = {
         })
     },
     Mutation: {
-        addUser(_, { email, username, password }, __) {
-            dbConnection_1.connection("users").insert({ email: email });
+        addUser(_, { input }) {
+            // console.log("CHECK email", input.email);
+            dbConnection_1.connection("profiles")
+                .returning("*")
+                .insert({
+                email: input.email,
+                username: input.username,
+                password: input.password,
+                id: uuid_1.default()
+            })
+                .then(() => console.log);
+            return input;
             // add knex function here
         }
     }
