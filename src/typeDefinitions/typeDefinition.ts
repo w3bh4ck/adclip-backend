@@ -1,5 +1,6 @@
 import { gql } from "apollo-server";
 import { connection } from "../db/dbConnection";
+import uuid from "uuid";
 
 interface newUser {
 	email: String;
@@ -29,6 +30,7 @@ export const typeDefs = gql`
 		email: String
 		username: String
 		password: String
+		id: String
 	}
 
 	type Mutation {
@@ -52,7 +54,8 @@ export const resolvers = {
 				.insert({
 					email: input.email,
 					username: input.username,
-					password: input.password
+					password: input.password,
+					id: uuid()
 				})
 				.then(() => console.log);
 			return input;
