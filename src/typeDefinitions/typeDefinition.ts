@@ -14,8 +14,15 @@ export const typeDefs = gql`
 		password: String
 	}
 
+	type user {
+		username: String
+		email: String
+		password: String
+	}
+
 	type Query {
 		users: [Users]
+		user: user!
 	}
 
 	input newUser {
@@ -25,7 +32,7 @@ export const typeDefs = gql`
 	}
 
 	type Mutation {
-		addUser(input: newUser): [Users]!
+		addUser(input: newUser): user
 	}
 `;
 
@@ -40,15 +47,15 @@ export const resolvers = {
 	Mutation: {
 		addUser(_: any, { input }: any) {
 			// console.log("CHECK email", input.email);
-			connection("users")
+			connection("profiles")
+				.returning("*")
 				.insert({
 					email: input.email,
 					username: input.username,
 					password: input.password
 				})
 				.then(() => console.log);
-			return [input];
-
+			return input;
 			// add knex function here
 		}
 	}
