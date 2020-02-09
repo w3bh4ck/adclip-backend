@@ -1,6 +1,7 @@
 import { gql } from "apollo-server";
 import { Entity, Column, PrimaryColumn, createConnection } from "typeorm";
 import { connection } from "../db/dbConnection";
+// import { userProfile } from "../entity/userProfile";
 import uuid from "uuid";
 
 interface newUser {
@@ -12,8 +13,8 @@ interface newUser {
 
 @Entity()
 class userProfile {
-	@PrimaryColumn()
-	id: number;
+	@PrimaryColumn("uuid")
+	id: string;
 
 	@Column("text")
 	username: string;
@@ -25,22 +26,6 @@ class userProfile {
 	password: string;
 }
 
-// createConnection({
-// 	type: "postgres",
-// 	host: "localhost",
-// 	port: 5432,
-// 	username: "w3bh4ck",
-// 	password: "secret",
-// 	database: "adclip",
-// 	entities: [userProfile],
-// 	synchronize: true,
-// 	logging: false
-// })
-// 	.then(connection => {
-// 		// here you can start to work with your entities
-// 	})
-// 	.catch(error => console.log(error));
-
 export const typeDefs = gql`
 	type Users {
 		username: String
@@ -49,6 +34,7 @@ export const typeDefs = gql`
 	}
 
 	type user {
+		id: String
 		username: String
 		email: String
 		password: String
@@ -92,15 +78,6 @@ export const resolvers = {
 				})
 				.catch(error => console.log(error));
 
-			// connection("profiles")
-			// 	.returning("*")
-			// 	.insert({
-			// 		email: input.email,
-			// 		username: input.username,
-			// 		password: input.password,
-			// 		id: uuid()
-			// 	})
-			// 	.then(() => console.log);
 			return input;
 			// add knex function here
 		}
