@@ -42,21 +42,21 @@ __decorate([
 userProfile = __decorate([
     typeorm_1.Entity()
 ], userProfile);
-typeorm_1.createConnection({
-    type: "postgres",
-    host: "localhost",
-    port: 5432,
-    username: "w3bh4ck",
-    password: "secret",
-    database: "adclip",
-    entities: [userProfile],
-    synchronize: true,
-    logging: false
-})
-    .then(connection => {
-    // here you can start to work with your entities
-})
-    .catch(error => console.log(error));
+// createConnection({
+// 	type: "postgres",
+// 	host: "localhost",
+// 	port: 5432,
+// 	username: "w3bh4ck",
+// 	password: "secret",
+// 	database: "adclip",
+// 	entities: [userProfile],
+// 	synchronize: true,
+// 	logging: false
+// })
+// 	.then(connection => {
+// 		// here you can start to work with your entities
+// 	})
+// 	.catch(error => console.log(error));
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
@@ -95,7 +95,7 @@ exports.resolvers = {
     },
     Mutation: {
         addUser(_, { input }) {
-            typeorm_1.createConnection( /*...*/)
+            typeorm_1.createConnection()
                 .then((connection) => __awaiter(this, void 0, void 0, function* () {
                 let newProfile = new userProfile();
                 newProfile.email = input.email;
