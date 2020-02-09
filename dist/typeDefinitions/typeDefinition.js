@@ -24,8 +24,8 @@ const dbConnection_1 = require("../db/dbConnection");
 let userProfile = class userProfile {
 };
 __decorate([
-    typeorm_1.PrimaryColumn(),
-    __metadata("design:type", Number)
+    typeorm_1.PrimaryColumn("uuid"),
+    __metadata("design:type", String)
 ], userProfile.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column("text"),
@@ -42,21 +42,6 @@ __decorate([
 userProfile = __decorate([
     typeorm_1.Entity()
 ], userProfile);
-// createConnection({
-// 	type: "postgres",
-// 	host: "localhost",
-// 	port: 5432,
-// 	username: "w3bh4ck",
-// 	password: "secret",
-// 	database: "adclip",
-// 	entities: [userProfile],
-// 	synchronize: true,
-// 	logging: false
-// })
-// 	.then(connection => {
-// 		// here you can start to work with your entities
-// 	})
-// 	.catch(error => console.log(error));
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
@@ -65,6 +50,7 @@ exports.typeDefs = apollo_server_1.gql `
 	}
 
 	type user {
+		id: String
 		username: String
 		email: String
 		password: String
@@ -105,15 +91,6 @@ exports.resolvers = {
                 console.log("Photo has been saved", newProfile);
             }))
                 .catch(error => console.log(error));
-            // connection("profiles")
-            // 	.returning("*")
-            // 	.insert({
-            // 		email: input.email,
-            // 		username: input.username,
-            // 		password: input.password,
-            // 		id: uuid()
-            // 	})
-            // 	.then(() => console.log);
             return input;
             // add knex function here
         }

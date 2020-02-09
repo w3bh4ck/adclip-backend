@@ -1,5 +1,5 @@
 {
-	"type": "pg",
+	"type": "postgres",
 	"host": "localhost",
 	"port": 5432,
 	"username": "w3bh4ck",
@@ -7,7 +7,7 @@
 	"database": "adclip",
 	"synchronize": true,
 	"logging": false,
-	"entities": ["src/entity/**/*.ts"],
+	"entities": ["src/typeDefinitions/typeDefinition.ts"],
 	"migrations": ["src/migration/**/*.ts"],
 	"subscribers": ["src/subscriber/**/*.ts"]
 }
