@@ -18,9 +18,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const apollo_server_1 = require("apollo-server");
 const typeorm_1 = require("typeorm");
 const dbConnection_1 = require("../db/dbConnection");
+const apollo_server_1 = require("apollo-server");
 let userProfile = class userProfile {
 };
 __decorate([

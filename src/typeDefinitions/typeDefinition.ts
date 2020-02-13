@@ -1,9 +1,8 @@
-import { gql } from "apollo-server";
-import { Entity, Column, PrimaryColumn, createConnection } from "typeorm";
-import { connection } from "../db/dbConnection";
 // import { userProfile } from "../entity/userProfile";
 import uuid from "uuid";
-
+import { connection } from "../db/dbConnection";
+import { gql } from "apollo-server";
+import { Entity, Column, PrimaryColumn, createConnection } from "typeorm";
 interface newUser {
 	email: String;
 	username: String;
