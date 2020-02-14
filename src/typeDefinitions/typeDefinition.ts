@@ -2,27 +2,7 @@
 import uuid from "uuid";
 import { connection } from "../db/dbConnection";
 import { gql } from "apollo-server";
-// interface newUser {
-// 	email: String;
-// 	username: String;
-// 	password: String;
-// 	id: number;
-// }
-
-// @Entity()
-// class userProfile {
-// 	@PrimaryColumn("uuid")
-// 	id: string;
-
-// 	@Column("text")
-// 	username: string;
-
-// 	@Column("text")
-// 	email: string;
-
-// 	@Column()
-// 	password: string;
-// }
+import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 
 export const typeDefs = gql`
 	type Users {
