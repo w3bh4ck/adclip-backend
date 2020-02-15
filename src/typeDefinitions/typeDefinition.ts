@@ -43,21 +43,21 @@ export const resolvers = {
 		}
 	}
 
-	// Mutation: {
-	// 	addUser(_: any, { input }: any) {
-	// 		createConnection()
-	// 			.then(async connection => {
-	// 				let newProfile = new userProfile();
-	// 				newProfile.email = input.email;
-	// 				newProfile.username = input.username;
-	// 				newProfile.password = input.password;
-	// 				await connection.manager.save(newProfile);
-	// 				console.log("Photo has been saved", newProfile);
-	// 			})
-	// 			.catch(error => console.log(error));
+	Mutation: {
+		addUser(_: any, { input }: any) {
+			createConnection()
+				.then(async connection => {
+					let newProfile = new userProfile();
+					newProfile.email = input.email;
+					newProfile.username = input.username;
+					newProfile.password = input.password;
+					await connection.manager.save(newProfile);
+					console.log("Photo has been saved", newProfile);
+				})
+				.catch(error => console.log(error));
 
-	// 		return input;
-	// 		// add knex function here
-	// 	}
-	// }
+			return input;
+			// add knex function here
+		}
+	}
 };
