@@ -1,8 +1,8 @@
 // import { userProfile } from "../entity/userProfile";
-import uuid from "uuid";
+// import uuid from "uuid";
 import { connection } from "../db/dbConnection";
 import { gql } from "apollo-server";
-import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
+// import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 
 export const typeDefs = gql`
 	type Users {
@@ -43,21 +43,21 @@ export const resolvers = {
 		}
 	}
 
-	// Mutation: {
-	// 	addUser(_: any, { input }: any) {
-	// 		createConnection()
-	// 			.then(async connection => {
-	// 				let newProfile = new userProfile();
-	// 				newProfile.email = input.email;
-	// 				newProfile.username = input.username;
-	// 				newProfile.password = input.password;
-	// 				await connection.manager.save(newProfile);
-	// 				console.log("Photo has been saved", newProfile);
-	// 			})
-	// 			.catch(error => console.log(error));
+	Mutation: {
+		addUser(_: any, { input }: any) {
+			createConnection()
+				.then(async connection => {
+					let newProfile = new userProfile();
+					newProfile.email = input.email;
+					newProfile.username = input.username;
+					newProfile.password = input.password;
+					await connection.manager.save(newProfile);
+					console.log("Photo has been saved", newProfile);
+				})
+				.catch(error => console.log(error));
 
-	// 		return input;
-	// 		// add knex function here
-	// 	}
-	// }
+			return input;
+			// add knex function here
+		}
+	}
 };
