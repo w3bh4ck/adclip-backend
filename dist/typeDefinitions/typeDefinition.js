@@ -11,23 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const dbConnection_1 = require("../db/dbConnection");
 const apollo_server_1 = require("apollo-server");
-// interface newUser {
-// 	email: String;
-// 	username: String;
-// 	password: String;
-// 	id: number;
-// }
-// @Entity()
-// class userProfile {
-// 	@PrimaryColumn("uuid")
-// 	id: string;
-// 	@Column("text")
-// 	username: string;
-// 	@Column("text")
-// 	email: string;
-// 	@Column()
-// 	password: string;
-// }
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
