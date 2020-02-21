@@ -9,8 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// import { userProfile } from "../entity/userProfile";
+// import uuid from "uuid";
 const dbConnection_1 = require("../db/dbConnection");
 const apollo_server_1 = require("apollo-server");
+// import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
 exports.typeDefs = apollo_server_1.gql `
 	type Users {
 		username: String
@@ -48,18 +51,18 @@ exports.resolvers = {
             return users;
         })
     }
-    // Mutation: {
+    // eMutation: {
     // 	addUser(_: any, { input }: any) {
-    // 		createConnection()
-    // 			.then(async connection => {
-    // 				let newProfile = new userProfile();
-    // 				newProfile.email = input.email;
-    // 				newProfile.username = input.username;
-    // 				newProfile.password = input.password;
-    // 				await connection.manager.save(newProfile);
-    // 				console.log("Photo has been saved", newProfile);
-    // 			})
-    // 			.catch(error => console.log(error));
+    // 		// createConnection()
+    // 		// 	.then(async connection => {
+    // 		// 		let newProfile = new userProfile();
+    // 		// 		newProfile.email = input.email;
+    // 		// 		newProfile.username = input.username;
+    // 		// 		newProfile.password = input.password;
+    // 		// 		await connection.manager.save(newProfile);
+    // 		// 		console.log("Photo has been saved", newProfile);
+    // 		// 	})
+    // 		// 	.catch(error => console.log(error));
     // 		return input;
     // 		// add knex function here
     // 	}
