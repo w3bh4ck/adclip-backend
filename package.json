@@ -6,7 +6,7 @@
 	"scripts": {
 		"build": "tsc",
 		"prestart": "npm run build",
-		"start": "nodemon ."
+		"start": "nodemon --experimental-modules ."
 	},
 	"author": "",
 	"license": "ISC",
