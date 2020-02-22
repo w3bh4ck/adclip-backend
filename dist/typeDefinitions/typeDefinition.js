@@ -1,71 +1,18 @@
 "use strict";
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// import { userProfile } from "../entity/userProfile";
-// import uuid from "uuid";
-const dbConnection_1 = require("../db/dbConnection");
-const apollo_server_1 = require("apollo-server");
+var apollo_server_1 = require("apollo-server");
 // import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
-exports.typeDefs = apollo_server_1.gql `
-	type Users {
-		username: String
-		email: String
-		password: String
-	}
-
-	type user {
-		id: String
-		username: String
-		email: String
-		password: String
-	}
-
-	type Query {
-		users: [Users]
-		user: user!
-	}
-
-	input newUser {
-		email: String
-		username: String
-		password: String
-		id: String
-	}
-
-	type Mutation {
-		addUser(input: newUser): user
-	}
-`;
+exports.typeDefs = apollo_server_1.gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n\ttype Users {\n\t\tusername: String\n\t\temail: String\n\t\tpassword: String\n\t}\n\n\ttype user {\n\t\tid: String\n\t\tusername: String\n\t\temail: String\n\t\tpassword: String\n\t}\n\n\ttype Query {\n\t\tusers: [Users]\n\t\tuser: user!\n\t}\n\n\tinput newUser {\n\t\temail: String\n\t\tusername: String\n\t\tpassword: String\n\t\tid: String\n\t}\n\n\ttype Mutation {\n\t\taddUser(input: newUser): user\n\t}\n"], ["\n\ttype Users {\n\t\tusername: String\n\t\temail: String\n\t\tpassword: String\n\t}\n\n\ttype user {\n\t\tid: String\n\t\tusername: String\n\t\temail: String\n\t\tpassword: String\n\t}\n\n\ttype Query {\n\t\tusers: [Users]\n\t\tuser: user!\n\t}\n\n\tinput newUser {\n\t\temail: String\n\t\tusername: String\n\t\tpassword: String\n\t\tid: String\n\t}\n\n\ttype Mutation {\n\t\taddUser(input: newUser): user\n\t}\n"])));
 exports.resolvers = {
     Query: {
-        users: () => __awaiter(void 0, void 0, void 0, function* () {
-            const users = yield dbConnection_1.connection.select("*").from("users");
-            return users;
-        })
+        users: function () {
+            name: "lucky";
+        }
     }
-    // eMutation: {
-    // 	addUser(_: any, { input }: any) {
-    // 		// createConnection()
-    // 		// 	.then(async connection => {
-    // 		// 		let newProfile = new userProfile();
-    // 		// 		newProfile.email = input.email;
-    // 		// 		newProfile.username = input.username;
-    // 		// 		newProfile.password = input.password;
-    // 		// 		await connection.manager.save(newProfile);
-    // 		// 		console.log("Photo has been saved", newProfile);
-    // 		// 	})
-    // 		// 	.catch(error => console.log(error));
-    // 		return input;
-    // 		// add knex function here
-    // 	}
-    // }
 };
+var templateObject_1;
 //# sourceMappingURL=typeDefinition.js.map
