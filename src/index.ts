@@ -1,8 +1,5 @@
-import "reflect-metadata";
-import { createConnection } from "typeorm";
-import { User } from "./entity/User";
 import gql from "graphql-tag";
-import ApolloServer from ""
+import { ApolloServer } from "apollo-server";
 
 const typeDefs = gql`
 	type User {
@@ -28,7 +25,9 @@ const resolvers = {
 	}
 };
 
-const server = 
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.listen(4000).then(() => console.log("app is running on port 4000"));
 
 // createConnection().then(async connection => {
 
