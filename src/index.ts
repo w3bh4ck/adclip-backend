@@ -1,6 +1,34 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { User } from "./entity/User";
+import gql from "graphql-tag";
+import ApolloServer from ""
+
+const typeDefs = gql`
+	type User {
+		id: ID!
+		email: String!
+		avatar: String
+		phone: Int
+	}
+
+	type Query {
+		me: User!
+	}
+`;
+
+const resolvers = {
+	Query: {
+		me() {
+			return {
+				email: "lucky@sofcom.ng",
+				phone: "07037401405"
+			};
+		}
+	}
+};
+
+const server = 
 
 // createConnection().then(async connection => {
 
