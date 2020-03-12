@@ -9,6 +9,8 @@
    },
    "dependencies": {
       "bcrypt": "^4.0.1",
+      "graphql": "^14.6.0",
+      "graphql-tag": "^2.10.3",
       "pg": "^7.18.2",
       "reflect-metadata": "^0.1.13",
       "typeorm": "0.2.24"
