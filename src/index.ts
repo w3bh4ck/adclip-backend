@@ -1,32 +1,8 @@
-import gql from "graphql-tag";
 import { ApolloServer } from "apollo-server";
-
-const typeDefs = gql`
-	type User {
-		id: ID!
-		email: String!
-		avatar: String
-		phone: Int
-	}
-
-	type Query {
-		me: User!
-	}
-`;
-
-const resolvers = {
-	Query: {
-		me() {
-			return {
-				email: "lucky@sofcom.ng",
-				phone: "07037401405"
-			};
-		}
-	}
-};
+import { typeDefs } from "./types/typeDefinitions";
+import { resolvers } from "./resolvers/resolver";
 
 const server = new ApolloServer({ typeDefs, resolvers });
-
 server.listen(4000).then(() => console.log("app is running on port 4000"));
 
 // createConnection().then(async connection => {
