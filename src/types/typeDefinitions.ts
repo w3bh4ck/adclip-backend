@@ -4,7 +4,7 @@ export const typeDefs = gql`
 		id: ID!
 		email: String!
 		avatar: String
-		phone: Int
+		phone: String
 	}
 
 	type Query {
