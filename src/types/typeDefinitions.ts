@@ -3,11 +3,10 @@ export const typeDefs = gql`
 	type User {
 		id: ID!
 		email: String!
-		avatar: String
-		phone: String
+		username: String!
 	}
 
 	type Query {
-		me: User!
+		users: [User]!
 	}
 `;
