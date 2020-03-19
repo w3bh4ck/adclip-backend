@@ -1,14 +1,16 @@
-import { User } from "./../entity/User";
-import { getManager } from "typeorm";
+import { Users } from "./../entity/User";
+import { getConnection } from "typeorm";
 
 export const resolvers = {
 	Query: {
 		async users() {
-			const user = await getManager()
-				.createQueryBuilder(User, "profiles")
-				.getMany();
-			console.log("user", user);
-			return user;
+			const users = await getConnection()
+				.createQueryBuilder()
+				.select("Users")
+				.from(Users, "Users")
+				.getOne();
+			console.log("db", users);
+			return users;
 		}
 	}
 };
