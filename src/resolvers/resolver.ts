@@ -1,10 +1,14 @@
+import { User } from "./../entity/User";
+import { getManager } from "typeorm";
+
 export const resolvers = {
 	Query: {
-		me() {
-			return {
-				email: "lucky@sofcom.ng",
-				phone: "07037401405"
-			};
+		async users() {
+			const user = await getManager()
+				.createQueryBuilder(User, "profiles")
+				.getMany();
+			console.log("user", user);
+			return user;
 		}
 	}
 };
