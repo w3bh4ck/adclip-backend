@@ -1,15 +1,15 @@
-import { Users } from "./../entity/User";
+import { Entity } from "typeorm";
+import { User } from "../entity/User";
+import { userInfo } from "os";
 
 export const resolvers = {
 	Query: {
-		// async users() {
-		// 	const users = await getConnection()
-		// 		.createQueryBuilder()
-		// 		.select("Users")
-		// 		.from(Users, "Users")
-		// 		.getOne();
-		// 	console.log("db", users);
-		// 	return users;
-		// }
+		async user() {
+			let data = {
+				email: "law@gmail.com",
+				username: "w3bh4ck"
+			};
+			return data;
+		}
 	}
 };
