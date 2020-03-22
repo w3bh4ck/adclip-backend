@@ -11,12 +11,17 @@ interface UserType {
 
 export const resolvers = {
 	Query: {
-		user() {
-			let user = connection<UserType>()
-				.select("id")
+		user(_: any, { input }) {
+			let id = input.id;
+			let user = connection
+				.select("*")
 				.from("users")
-				.where({ id: 1 });
-			console.log("id", user);
+				.where({ id })
+				.then(data => {
+					return data;
+				})
+				.catch(err => console.log("there was an error"));
+			console.log("user", user);
 			return user;
 		}
 	}
