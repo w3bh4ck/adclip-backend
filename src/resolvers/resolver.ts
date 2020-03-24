@@ -11,14 +11,14 @@ interface UserType {
 
 export const resolvers = {
 	Query: {
-		user(_: any, { input }) {
+		async user(_: any, { input }) {
 			let id = input.id;
-			let user = connection
+			let user = await connection
 				.select("*")
 				.from("users")
 				.where({ id })
 				.then(data => {
-					return data;
+					return data[0];
 				})
 				.catch(err => console.log("there was an error"));
 			console.log("user", user);
