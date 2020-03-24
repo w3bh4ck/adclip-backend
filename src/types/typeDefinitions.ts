@@ -6,11 +6,22 @@ export const typeDefs = gql`
 		username: String
 	}
 
-	input userId {
+	input UserId {
 		id: Int
 	}
 
+	input NewUserInput {
+		_id: String!
+		username: String!
+		email: String!
+		password: String!
+	}
+
 	type Query {
-		user(input: userId): User
+		user(input: UserId): User
+	}
+
+	type Mutation {
+		newUser(input: NewUserInput): User
 	}
 `;
