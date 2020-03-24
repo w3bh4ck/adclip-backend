@@ -6,11 +6,11 @@ export const typeDefs = gql`
 		username: String
 	}
 
-	input userInput {
+	input userId {
 		id: Int
 	}
 
 	type Query {
-		user(input: userInput): [User]
+		user(input: userId): [User]
 	}
 `;
