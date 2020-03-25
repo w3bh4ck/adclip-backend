@@ -4,6 +4,7 @@ export const typeDefs = gql`
 		id: ID
 		email: String
 		username: String
+		password: String
 	}
 
 	input UserId {
@@ -11,7 +12,6 @@ export const typeDefs = gql`
 	}
 
 	input NewUserInput {
-		_id: String!
 		username: String!
 		email: String!
 		password: String!

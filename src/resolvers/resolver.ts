@@ -24,5 +24,15 @@ export const resolvers = {
 			console.log("user", user);
 			return user;
 		}
+	},
+
+	Mutation: {
+		async newUser(_: any, { input }) {
+			let newUser = await connection("users")
+				.returning(["id", "username", "email"])
+				.insert({ id: "545", username: input.username, email: input.email, password: input.password });
+			console.log("new user", newUser);
+			return newUser;
+		}
 	}
 };
