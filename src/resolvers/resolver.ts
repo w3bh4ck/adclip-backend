@@ -31,7 +31,7 @@ export const resolvers = {
 			let newUser = await connection("users")
 				.returning(["id", "username", "email"])
 				.insert({ id: "545", username: input.username, email: input.email, password: input.password });
-			console.log("new user", newUser);
+
 			return newUser;
 		}
 	}
