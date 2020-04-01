@@ -21,7 +21,7 @@ export const resolvers = {
 					return data[0];
 				})
 				.catch(err => console.log("there was an error"));
-			console.log("user", user);
+
 			return user;
 		}
 	},
